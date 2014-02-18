@@ -1,0 +1,1 @@
+VWF_HOST=$1 sprinkle -c -s config/install.rb

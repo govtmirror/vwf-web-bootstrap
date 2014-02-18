@@ -1,0 +1,38 @@
+<VirtualHost *:80>
+  ServerName <%= host_name %>:80
+  DocumentRoot <%= public_path %>
+
+  RewriteEngine on
+  RewriteCond %{HTTP_HOST} ^www\.<%= host_name_escaped %>
+  RewriteRule ^(.*)$ http://<%= host_name_escaped %>$1 [R=permanent,L]
+
+  <Directory <%= public_path %>>
+      Options -MultiViews
+      Allow from all
+      AllowOverride none
+  </Directory>
+
+</VirtualHost>
+
+<VirtualHost *:443>
+	ServerName <%= host_name %>:80
+	DocumentRoot <%= public_path %>
+
+  RewriteEngine on
+  RewriteCond %{HTTP_HOST} ^www\.<%= host_name_escaped %>
+  RewriteRule ^(.*)$ http://<%= host_name_escaped %>$1 [R=permanent,L]
+
+	<Directory <%= public_path %>>
+		Options -MultiViews
+		Allow from all
+		AllowOverride none
+	</Directory>
+ 
+	SSLEngine on
+	SSLProtocol all
+	SSLCertificateFile /home/<%= user_name %>/public.crt
+	SSLCertificateKeyFile /home/<%= user_name %>/private.key
+	SSLCACertificateFile /home/<%= user_name %>/intermediate.crt
+</VirtualHost>
+
+SSLPassPhraseDialog exec:/home/<%= user_name %>/password
