@@ -22,8 +22,10 @@ package :vwf do
   mkdir_and_chown(app_path, user_name)
   mkdir_and_chown(shared_path, user_name)
   mkdir_and_chown("#{shared_path}/config", user_name)
-  mkdir_and_chown(current_path, user_name)
-  mkdir_and_chown("#{current_path}/_site", user_name)
+
+  # We need to create a symlink to *something*, b/c Apache won't start
+  # without it, but we don't have a real release to symlink to.
+  runner "ln -s #{shared_path} #{current_path}"
 
   # Apache virtual host
 
