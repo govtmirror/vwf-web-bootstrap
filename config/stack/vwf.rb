@@ -10,13 +10,12 @@ package :vwf do
   app_path = "/var/www/#{app_name}"
   current_path = "#{app_path}/current"
   shared_path = "#{app_path}/shared"
-  public_path = "#{current_path}/_site"
   locals = {
     :user_name => user_name,
     :host_name => host_name,
     :host_name_escaped => host_name.gsub('.', '\.'),
     :app_name => app_name,
-    :public_path => public_path
+    :public_path => current_path
   }
 
   # Directory structure
