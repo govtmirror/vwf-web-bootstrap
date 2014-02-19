@@ -10,7 +10,7 @@
 
     Note: Remember to use `sudo visudo` when editing sudoers.
 
-3. Copy public keys for user vwf.
+3. Copy public keys for user vwf into authorized_keys file.
 
 4. Disable password authentication. Edit `/etc/ssh/sshd_config` to:
 
