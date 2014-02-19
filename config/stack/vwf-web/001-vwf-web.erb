@@ -1,17 +1,6 @@
 <VirtualHost *:80>
   ServerName <%= host_name %>:80
-  DocumentRoot <%= public_path %>
-
-  RewriteEngine on
-  RewriteCond %{HTTP_HOST} ^www\.<%= host_name_escaped %>
-  RewriteRule ^(.*)$ http://<%= host_name_escaped %>$1 [R=permanent,L]
-
-  <Directory <%= public_path %>>
-      Options -MultiViews
-      Allow from all
-      AllowOverride none
-  </Directory>
-
+  Redirect permanent / https://<%= host_name %>/
 </VirtualHost>
 
 <VirtualHost *:443>
@@ -20,7 +9,7 @@
 
   RewriteEngine on
   RewriteCond %{HTTP_HOST} ^www\.<%= host_name_escaped %>
-  RewriteRule ^(.*)$ http://<%= host_name_escaped %>$1 [R=permanent,L]
+  RewriteRule ^(.*)$ https://<%= host_name_escaped %>$1 [R=permanent,L]
 
 	<Directory <%= public_path %>>
 		Options -MultiViews
