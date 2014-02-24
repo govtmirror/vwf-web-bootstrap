@@ -1,5 +1,11 @@
 <VirtualHost *:80>
-  ServerName <%= host_name %>:80
+  ServerName virtualworldframework.com
+  ServerAlias www.virtualworldframework.com
+  Redirect permanent / https://<%= host_name %>/
+</VirtualHost>
+
+<VirtualHost *:80>
+  ServerName <%= host_name %>
   Redirect permanent / https://<%= host_name %>/
 </VirtualHost>
 
